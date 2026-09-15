@@ -1,7 +1,5 @@
 ```css
-/* =========================================
-   PORTFOLIO — THANASORN KETUCHIM
-   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
 :root {
     --bg: #f7f3ed;
@@ -11,18 +9,7 @@
     --accent: #b58b72;
     --accent-light: #d8c1b1;
     --white: #ffffff;
-    --border: rgba(41, 38, 34, 0.12);
-
-    --font-main: "DM Sans", sans-serif;
-    --font-title: "Playfair Display", serif;
-
-    --transition: 0.4s ease;
 }
-
-
-/* =========================================
-   RESET
-   ========================================= */
 
 * {
     margin: 0;
@@ -35,149 +22,127 @@ html {
 }
 
 body {
+    font-family: "DM Sans", sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-main);
     overflow-x: hidden;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-}
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font-family: inherit;
-}
-
-
-/* =========================================
+/* =========================
    LOADER
-   ========================================= */
+========================= */
 
 #loader {
     position: fixed;
     inset: 0;
-    z-index: 9999;
-
+    background: var(--bg);
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background: var(--bg);
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0.8s ease;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 #loader.hide {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
 }
 
 .loader-content {
-    width: min(300px, 80%);
     text-align: center;
 }
 
 .loader-content span {
-    display: block;
-
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-
-    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    letter-spacing: 5px;
 }
 
 .loader-line {
-    width: 0;
-    height: 1px;
-
-    margin: auto;
-
-    background: var(--text);
-
-    animation: loaderLine 1.5s ease forwards;
+    width: 120px;
+    height: 2px;
+    background: var(--accent);
+    margin: 15px auto 0;
+    animation: loading 1.5s infinite ease-in-out;
 }
 
-@keyframes loaderLine {
-    from {
-        width: 0;
+@keyframes loading {
+    0% {
+        transform: scaleX(0);
+        transform-origin: left;
     }
 
-    to {
-        width: 100%;
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    100% {
+        transform: scaleX(0);
+        transform-origin: right;
     }
 }
 
 
-/* =========================================
+/* =========================
    NAVBAR
-   ========================================= */
+========================= */
 
 .navbar {
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 75px;
-
-    padding: 0 5vw;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    padding: 0 5%;
+
+    background: rgba(247, 243, 237, 0.92);
+    backdrop-filter: blur(12px);
+
     z-index: 1000;
 
-    background: rgba(247, 243, 237, 0.88);
-
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(41, 38, 34, 0.08);
 }
 
 .nav-logo a {
-    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 2px;
 }
 
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 32px;
 }
 
 .nav-menu a {
     position: relative;
 
-    font-size: 10px;
+    color: var(--text);
+    text-decoration: none;
+
+    font-size: 12px;
     font-weight: 600;
+    letter-spacing: 1.5px;
 
-    letter-spacing: 0.15em;
-
-    color: var(--text-light);
-
-    transition: var(--transition);
+    transition: color 0.3s ease;
 }
 
 .nav-menu a::after {
     content: "";
 
     position: absolute;
-
     left: 0;
     bottom: -7px;
 
@@ -189,64 +154,74 @@ button {
     transition: width 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--text);
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--accent);
 }
 
-.nav-menu a:hover::after {
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
     width: 100%;
 }
 
 
-/* =========================================
-   MOBILE MENU BUTTON
-   ========================================= */
+/* =========================
+   MOBILE MENU
+========================= */
 
 .menu-toggle {
     display: none;
 
-    width: 40px;
-    height: 40px;
-
-    border: 0;
+    border: none;
     background: transparent;
 
-    cursor: pointer;
+    width: 35px;
+    height: 35px;
 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+    cursor: pointer;
 }
 
 .menu-toggle span {
     display: block;
 
-    width: 22px;
-    height: 1px;
+    width: 25px;
+    height: 2px;
 
     background: var(--text);
 
-    transition: var(--transition);
+    margin: 5px auto;
+
+    transition: 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 
-/* =========================================
+/* =========================
    PROGRESS BAR
-   ========================================= */
+========================= */
 
 .progress-bar {
     position: fixed;
-
     top: 75px;
     left: 0;
 
     width: 100%;
-    height: 2px;
+    height: 3px;
+
+    background: rgba(181, 139, 114, 0.15);
 
     z-index: 999;
-
-    background: rgba(41, 38, 34, 0.08);
 }
 
 .progress-fill {
@@ -259,251 +234,153 @@ button {
 }
 
 
-/* =========================================
-   PORTFOLIO PAGE
-   ========================================= */
+/* =========================
+   PORTFOLIO PAGES
+========================= */
 
 .portfolio-page {
     position: relative;
 
+    width: 100%;
     min-height: 100vh;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 110px 5vw 70px;
+    padding: 100px 5% 50px;
 
-    overflow: hidden;
+    opacity: 0;
+    transform: translateY(35px);
 
-    background: var(--bg);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-
-/* =========================================
-   IMAGE AREA
-   ========================================= */
+.portfolio-page.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .page-image {
-    position: relative;
-
-    width: min(1400px, 92vw);
-
-    max-height: calc(100vh - 160px);
+    width: 100%;
+    height: calc(100vh - 150px);
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    overflow: hidden;
-
-    border-radius: 2px;
-
-    box-shadow:
-        0 20px 70px rgba(41, 38, 34, 0.08);
 }
 
 .page-image img {
-    width: 100%;
-    height: auto;
+    display: block;
 
-    max-height: calc(100vh - 160px);
+    max-width: 100%;
+    max-height: 100%;
+
+    width: auto;
+    height: auto;
 
     object-fit: contain;
 
-    transition:
-        transform 1s cubic-bezier(.2,.8,.2,1),
-        filter 0.8s ease;
+    border-radius: 4px;
+
+    box-shadow: 0 20px 60px rgba(41, 38, 34, 0.12);
+
+    background: var(--white);
 }
 
-.portfolio-page:hover .page-image img {
-    transform: scale(1.015);
-}
 
-
-/* =========================================
+/* =========================
    PAGE LABEL
-   ========================================= */
+========================= */
 
 .page-label {
     position: absolute;
 
-    left: 5vw;
-    bottom: 45px;
+    left: 5%;
+    bottom: 55px;
 
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 15px;
+
+    color: var(--text);
 
     pointer-events: none;
 }
 
 .page-label span {
-    font-size: 11px;
-
     color: var(--accent);
 
+    font-size: 12px;
     font-weight: 700;
 
-    letter-spacing: 0.15em;
+    letter-spacing: 2px;
 }
 
 .page-label h2 {
-    font-family: var(--font-title);
+    font-family: "Playfair Display", serif;
 
-    font-size: clamp(18px, 2vw, 30px);
+    font-size: 16px;
+    font-weight: 600;
 
-    font-weight: 500;
-
-    letter-spacing: 0.03em;
+    letter-spacing: 2px;
 }
 
 
-/* =========================================
+/* =========================
    PAGE NUMBER
-   ========================================= */
+========================= */
 
 .page-number {
     position: absolute;
 
-    right: 5vw;
-    bottom: 45px;
-
-    font-size: 10px;
-    font-weight: 600;
-
-    letter-spacing: 0.15em;
+    right: 5%;
+    bottom: 55px;
 
     color: var(--text-light);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
 }
 
 
-/* =========================================
+/* =========================
    COVER
-   ========================================= */
+========================= */
 
 .cover-page {
     padding-top: 75px;
-    padding-bottom: 0;
-
-    min-height: 100vh;
-
-    background: var(--bg);
 }
 
 .cover-page .page-image {
-    width: 100%;
-    height: calc(100vh - 75px);
-
-    max-height: none;
-
-    box-shadow: none;
-
-    border-radius: 0;
+    height: calc(100vh - 100px);
 }
 
 .cover-page .page-image img {
-    width: 100%;
-    height: 100%;
-
-    max-height: none;
-
-    object-fit: cover;
+    box-shadow: none;
 }
 
 
-/* =========================================
+/* =========================
    BACK COVER
-   ========================================= */
+========================= */
 
 .back-cover {
-    padding-bottom: 0;
-
-    background: var(--bg-soft);
-}
-
-.back-cover .page-image {
-    width: 100%;
-    height: calc(100vh - 75px);
-
-    max-height: none;
-
-    box-shadow: none;
-
-    border-radius: 0;
+    padding-bottom: 100px;
 }
 
 .back-cover .page-image img {
-    width: 100%;
-    height: 100%;
-
-    max-height: none;
-
-    object-fit: cover;
+    box-shadow: none;
 }
 
 
-/* =========================================
-   SECTION DECORATION
-   ========================================= */
-
-.portfolio-page::before {
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-    left: 0;
-
-    width: 1px;
-    height: 90px;
-
-    background: var(--accent-light);
-
-    transform: translateY(-50%);
-}
-
-
-/* =========================================
-   SCROLL REVEAL
-   ========================================= */
-
-.portfolio-page .page-image {
-    opacity: 0;
-
-    transform: translateY(35px);
-
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s cubic-bezier(.2,.8,.2,1);
-}
-
-.portfolio-page.show .page-image {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.portfolio-page .page-label {
-    opacity: 0;
-
-    transform: translateX(-20px);
-
-    transition:
-        opacity 0.8s ease 0.2s,
-        transform 0.8s ease 0.2s;
-}
-
-.portfolio-page.show .page-label {
-    opacity: 1;
-
-    transform: translateX(0);
-}
-
-
-/* =========================================
+/* =========================
    BACK TO TOP
-   ========================================= */
+========================= */
 
 .back-to-top {
     position: fixed;
@@ -514,28 +391,24 @@ button {
     width: 45px;
     height: 45px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px solid var(--border);
+    border: 1px solid var(--accent);
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--bg);
 
     color: var(--text);
 
-    font-size: 18px;
+    font-size: 20px;
 
     cursor: pointer;
 
     opacity: 0;
     visibility: hidden;
 
-    transform: translateY(10px);
+    transform: translateY(15px);
 
-    transition: var(--transition);
+    transition: all 0.3s ease;
 
     z-index: 900;
 }
@@ -543,108 +416,95 @@ button {
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
-
     transform: translateY(0);
 }
 
 .back-to-top:hover {
-    background: var(--text);
+    background: var(--accent);
     color: var(--white);
-
-    transform: translateY(-4px);
 }
 
 
-/* =========================================
+/* =========================
    TABLET
-   ========================================= */
+========================= */
 
 @media (max-width: 900px) {
+
+    .navbar {
+        height: 65px;
+    }
+
+    .progress-bar {
+        top: 65px;
+    }
 
     .nav-menu {
         gap: 18px;
     }
 
     .nav-menu a {
-        font-size: 9px;
+        font-size: 10px;
+    }
+
+    .portfolio-page {
+        padding-top: 90px;
     }
 
     .page-image {
-        width: 94vw;
-    }
-
-    .page-label {
-        left: 3vw;
-    }
-
-    .page-number {
-        right: 3vw;
+        height: calc(100vh - 150px);
     }
 }
 
 
-/* =========================================
+/* =========================
    MOBILE
-   ========================================= */
+========================= */
 
 @media (max-width: 700px) {
 
     .navbar {
         height: 65px;
-
-        padding: 0 20px;
+        padding: 0 6%;
     }
 
     .nav-logo a {
-        font-size: 12px;
+        font-size: 19px;
+    }
+
+    .menu-toggle {
+        display: block;
     }
 
     .nav-menu {
-        position: fixed;
+        position: absolute;
 
         top: 65px;
         left: 0;
 
         width: 100%;
 
-        padding: 25px 20px;
+        padding: 25px;
 
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-
         gap: 20px;
 
-        background: rgba(247, 243, 237, 0.97);
+        background: rgba(247, 243, 237, 0.98);
 
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(41, 38, 34, 0.08);
 
-        transform: translateY(-120%);
+        transform: translateY(-150%);
+        opacity: 0;
+        visibility: hidden;
 
-        transition: transform 0.4s ease;
+        transition: 0.35s ease;
     }
 
     .nav-menu.active {
         transform: translateY(0);
-    }
-
-    .nav-menu a {
-        font-size: 11px;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(4px, 4px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(4px, -4px);
+        opacity: 1;
+        visibility: visible;
     }
 
     .progress-bar {
@@ -654,31 +514,31 @@ button {
     .portfolio-page {
         min-height: 100svh;
 
-        padding: 90px 15px 75px;
+        padding: 85px 5% 85px;
     }
 
     .page-image {
         width: 100%;
-
-        max-height: calc(100svh - 170px);
-
-        box-shadow:
-            0 12px 35px rgba(41, 38, 34, 0.08);
+        height: calc(100svh - 160px);
     }
 
     .page-image img {
-        max-height: calc(100svh - 170px);
+        max-width: 100%;
+        max-height: 100%;
+
+        box-shadow: 0 12px 35px rgba(41, 38, 34, 0.1);
     }
 
     .page-label {
-        left: 20px;
-        bottom: 28px;
+        left: 5%;
+        bottom: 35px;
 
         gap: 10px;
     }
 
     .page-label h2 {
-        font-size: 15px;
+        font-size: 11px;
+        letter-spacing: 1px;
     }
 
     .page-label span {
@@ -686,56 +546,34 @@ button {
     }
 
     .page-number {
-        right: 20px;
-        bottom: 28px;
+        right: 5%;
+        bottom: 35px;
 
         font-size: 9px;
     }
 
-    .portfolio-page::before {
-        display: none;
-    }
-
-    .cover-page {
-        padding: 65px 0 0;
-    }
-
-    .cover-page .page-image {
-        width: 100%;
-        height: calc(100svh - 65px);
-    }
-
-    .back-cover {
-        padding: 65px 0 0;
-    }
-
-    .back-cover .page-image {
-        width: 100%;
-        height: calc(100svh - 65px);
-    }
-
     .back-to-top {
-        width: 40px;
-        height: 40px;
-
         right: 18px;
         bottom: 18px;
+
+        width: 40px;
+        height: 40px;
     }
 }
 
 
-/* =========================================
+/* =========================
    SMALL MOBILE
-   ========================================= */
+========================= */
 
 @media (max-width: 400px) {
 
-    .page-label h2 {
-        font-size: 13px;
+    .nav-logo a {
+        font-size: 17px;
     }
 
-    .page-label {
-        max-width: 70%;
+    .page-label h2 {
+        font-size: 9px;
     }
 
     .page-number {
@@ -744,9 +582,9 @@ button {
 }
 
 
-/* =========================================
+/* =========================
    REDUCED MOTION
-   ========================================= */
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -763,4 +601,3 @@ button {
     }
 }
 ```
-

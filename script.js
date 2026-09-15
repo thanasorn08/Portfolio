@@ -1,68 +1,30 @@
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
 
-    // =========================================
-    // IMAGE LOADER
-    // =========================================
+    // ==============================
+    // รูป Portfolio จาก GitHub
+    // ==============================
 
-    const folder = "นางสาวธนสร เกตุฉิม เลขที่38";
+    const folder =
+        "https://raw.githubusercontent.com/thanasorn08/Portfolio/main/" +
+        encodeURIComponent("นางสาวธนสร เกตุฉิม เลขที่38");
 
-    const extensions = [
-        ".png",
-        ".jpg",
-        ".jpeg",
-        ".webp"
-    ];
+    document.querySelectorAll("img[data-page]").forEach((img) => {
 
-    const images = document.querySelectorAll("img[data-page]");
+        const number = img.dataset.page;
 
-    images.forEach((img) => {
+        img.src = `${folder}/${number}.png`;
 
-        const pageNumber = img.dataset.page;
+        img.onerror = () => {
+            console.error(`ไม่พบรูป ${number}.png`);
+        };
 
-        let extensionIndex = 0;
-
-        function tryNextImage() {
-
-            if (extensionIndex >= extensions.length) {
-
-                console.error(
-                    `ไม่พบรูปหน้า ${pageNumber}`
-                );
-
-                img.alt = `ไม่พบรูป ${pageNumber}`;
-
-                return;
-            }
-
-            const extension = extensions[extensionIndex];
-
-            const imagePath =
-                encodeURI(
-                    `${folder}/${pageNumber}${extension}`
-                );
-
-            const testImage = new Image();
-
-            testImage.onload = () => {
-                img.src = imagePath;
-            };
-
-            testImage.onerror = () => {
-                extensionIndex++;
-                tryNextImage();
-            };
-
-            testImage.src = imagePath;
-        }
-
-        tryNextImage();
     });
 
 
-    // =========================================
+    // ==============================
     // LOADER
-    // =========================================
+    // ==============================
 
     const loader = document.getElementById("loader");
 
@@ -79,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // =========================================
+    // ==============================
     // MOBILE MENU
-    // =========================================
+    // ==============================
 
     const menuToggle =
         document.querySelector(".menu-toggle");
@@ -98,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
         menuToggle.addEventListener("click", () => {
 
             menuToggle.classList.toggle("active");
-
             navMenu.classList.toggle("active");
 
         });
@@ -109,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             link.addEventListener("click", () => {
 
                 menuToggle.classList.remove("active");
-
                 navMenu.classList.remove("active");
 
             });
@@ -119,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =========================================
-    // SCROLL PROGRESS
-    // =========================================
+    // ==============================
+    // PROGRESS BAR
+    // ==============================
 
     const progressFill =
         document.querySelector(".progress-fill");
@@ -129,33 +89,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateProgress() {
 
-        const scrollTop =
-            window.scrollY;
+        const scrollTop = window.scrollY;
 
-        const documentHeight =
+        const height =
             document.documentElement.scrollHeight -
             window.innerHeight;
 
 
-        if (documentHeight <= 0) {
-
-            if (progressFill) {
-                progressFill.style.width = "0%";
-            }
-
-            return;
-        }
+        if (height <= 0) return;
 
 
         const progress =
-            (scrollTop / documentHeight) * 100;
+            (scrollTop / height) * 100;
 
 
         if (progressFill) {
-
             progressFill.style.width =
                 `${progress}%`;
-
         }
 
     }
@@ -170,17 +120,15 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgress();
 
 
-    // =========================================
-    // PAGE SCROLL ANIMATION
-    // =========================================
+    // ==============================
+    // SCROLL ANIMATION
+    // ==============================
 
     const pages =
-        document.querySelectorAll(
-            ".portfolio-page"
-        );
+        document.querySelectorAll(".portfolio-page");
 
 
-    const pageObserver =
+    const observer =
         new IntersectionObserver(
             (entries) => {
 
@@ -203,14 +151,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pages.forEach((page) => {
 
-        pageObserver.observe(page);
+        observer.observe(page);
 
     });
 
 
-    // =========================================
+    // ==============================
     // BACK TO TOP
-    // =========================================
+    // ==============================
 
     const backToTop =
         document.querySelector(".back-to-top");
@@ -252,14 +200,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // =========================================
-    // ACTIVE NAVIGATION
-    // =========================================
+    // ==============================
+    // ACTIVE NAV
+    // ==============================
 
     const sections =
-        document.querySelectorAll(
-            ".portfolio-page"
-        );
+        document.querySelectorAll(".portfolio-page");
 
 
     const sectionObserver =
@@ -268,13 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 entries.forEach((entry) => {
 
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+                    if (!entry.isIntersecting) return;
 
 
-                    const currentId =
-                        entry.target.getAttribute("id");
+                    const id =
+                        entry.target.id;
 
 
                     navLinks.forEach((link) => {
@@ -282,18 +226,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         link.classList.remove("active");
 
 
-                        const href =
-                            link.getAttribute("href");
-
-
                         if (
-                            href ===
-                            `#${currentId}`
+                            link.getAttribute("href") ===
+                            `#${id}`
                         ) {
 
-                            link.classList.add(
-                                "active"
-                            );
+                            link.classList.add("active");
 
                         }
 
@@ -311,53 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach((section) => {
 
         sectionObserver.observe(section);
-
-    });
-
-
-    // =========================================
-    // SMOOTH SCROLL
-    // =========================================
-
-    navLinks.forEach((link) => {
-
-        link.addEventListener(
-            "click",
-            (event) => {
-
-                const targetId =
-                    link.getAttribute("href");
-
-
-                if (
-                    !targetId ||
-                    !targetId.startsWith("#")
-                ) {
-                    return;
-                }
-
-
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-
-                if (!target) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-        );
 
     });
 

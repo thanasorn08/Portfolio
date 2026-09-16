@@ -1,102 +1,61 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio | Thanasorn Ketuchim</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <title>THANASORN | Portfolio</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         LOADER
-    ========================== -->
-
+    <!-- Loading -->
     <div id="loader">
-        <div class="loader-content">
-            <span>THANASORN</span>
-            <div class="loader-line"></div>
+        <div class="loader-box">
+            <div class="loader-circle"></div>
+            <p>Loading Portfolio...</p>
         </div>
     </div>
 
+    <!-- Navigation -->
+    <nav class="navbar">
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
-    <header class="navbar">
-
-        <div class="nav-logo">
-            <a href="#home">THANASORN</a>
+        <div class="logo">
+            THANASORN
         </div>
 
-        <nav class="nav-menu">
-
-            <a href="#home">HOME</a>
-
-            <a href="#sop">SOP</a>
-
-            <a href="#profile">PROFILE</a>
-
-            <a href="#activities">ACTIVITIES</a>
-
-            <a href="#certificates">CERTIFICATE</a>
-
-        </nav>
-
-        <button
-            class="menu-toggle"
-            aria-label="เปิดเมนู"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
+        <button class="menu-btn" id="menuBtn">
+            ☰
         </button>
 
-    </header>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">HOME</a>
+            <a href="#sop">SOP</a>
+            <a href="#profile">PROFILE</a>
+            <a href="#activities">ACTIVITIES</a>
+            <a href="#certificate">CERTIFICATE</a>
+        </div>
 
+    </nav>
 
-    <!-- =========================
-         PROGRESS BAR
-    ========================== -->
-
-    <div class="progress-bar">
-        <div class="progress-fill"></div>
+    <!-- Progress -->
+    <div class="progress">
+        <div id="progressBar"></div>
     </div>
 
-
-    <!-- =========================
-         PORTFOLIO
-    ========================== -->
-
+    <!-- Portfolio -->
     <main id="portfolioPages"></main>
 
-
-    <!-- =========================
-         BACK TO TOP
-    ========================== -->
-
-    <button
-        class="back-to-top"
-        aria-label="กลับด้านบน"
-    >
+    <!-- Back To Top -->
+    <button id="topBtn" title="กลับด้านบน">
         ↑
     </button>
-
 
     <script src="script.js"></script>
 
 </body>
 </html>
+```

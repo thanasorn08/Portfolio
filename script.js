@@ -1,9 +1,8 @@
-```javascript
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
-       📁 โฟลเดอร์รูปของเตง
-       ===================================================== */
+       📁 IMAGE FOLDER
+    ===================================================== */
 
     const folderName =
         "สีแดงเข้ม โมเดิร์น แฟ้มสะสมผลงาน  พอร์ตโฟลิโอ Portfolio เอกสาร A4";
@@ -13,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       📚 ข้อมูล Portfolio 13 หน้า
-       ===================================================== */
+       📚 PORTFOLIO 13 PAGES
+    ===================================================== */
 
     const pages = [
+
         {
             number: "01",
             title: "",
@@ -120,12 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
             id: "back-cover",
             alt: "ปกหลัง"
         }
+
     ];
 
 
     /* =====================================================
-       🖼️ สร้างหน้า Portfolio
-       ===================================================== */
+       🖼️ CREATE PAGES
+    ===================================================== */
 
     const portfolioPages =
         document.getElementById("portfolioPages");
@@ -136,18 +137,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const section =
             document.createElement("section");
 
+
         section.className =
             "portfolio-page";
 
+
         if (index === 0) {
-            section.classList.add("cover-page");
+
+            section.classList.add(
+                "cover-page"
+            );
+
         }
+
 
         if (index === pages.length - 1) {
-            section.classList.add("back-cover");
+
+            section.classList.add(
+                "back-cover"
+            );
+
         }
 
-        section.id = page.id;
+
+        section.id =
+            page.id;
 
 
         const imagePath =
@@ -155,116 +169,172 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         section.innerHTML = `
+
             <div class="page-image">
 
                 <img
                     src="${imagePath}"
                     alt="${page.alt}"
-                    loading="${index === 0 ? "eager" : "lazy"}"
+                    loading="${
+                        index === 0
+                        ? "eager"
+                        : "lazy"
+                    }"
                 >
 
                 <div class="image-error">
-                    <strong>${page.number}</strong>
-                    <span>กำลังรอรูป ${page.image}</span>
+
+                    <strong>
+                        ${page.number}
+                    </strong>
+
+                    <span>
+                        ไม่พบรูป ${page.image}
+                    </span>
+
                 </div>
 
             </div>
 
+
             ${
                 page.title
-                ? `
-                    <div class="page-label">
-                        <span>${page.number}</span>
-                        <h2>${page.title}</h2>
-                    </div>
+                ?
                 `
-                : ""
+                <div class="page-label">
+
+                    <span>
+                        ${page.number}
+                    </span>
+
+                    <h2>
+                        ${page.title}
+                    </h2>
+
+                </div>
+                `
+                :
+                ""
             }
 
+
             <div class="page-number">
+
                 ${page.number} / 13
+
             </div>
+
         `;
 
 
-        portfolioPages.appendChild(section);
+        portfolioPages.appendChild(
+            section
+        );
 
 
         /* =================================================
-           ตรวจสอบรูป
+           IMAGE EVENTS
         ================================================= */
 
         const img =
             section.querySelector("img");
 
+
         const errorBox =
-            section.querySelector(".image-error");
-
-
-        img.addEventListener("load", () => {
-
-            section.classList.add("image-loaded");
-
-            if (errorBox) {
-                errorBox.style.display = "none";
-            }
-
-            console.log(
-                `✅ โหลด ${page.image} สำเร็จ`
+            section.querySelector(
+                ".image-error"
             );
 
-        });
+
+        img.addEventListener(
+            "load",
+            () => {
+
+                section.classList.add(
+                    "image-loaded"
+                );
 
 
-        img.addEventListener("error", () => {
+                if (errorBox) {
 
-            section.classList.add("image-missing");
+                    errorBox.style.display =
+                        "none";
 
-            if (errorBox) {
-                errorBox.style.display = "flex";
-            }
-
-            console.warn(
-                `❌ ไม่พบรูป: ${imagePath}`
-            );
-
-        });
+                }
 
 
-        /* คลิกรูปเพื่อเปิดเต็มจอ */
-
-        img.addEventListener("click", () => {
-
-            if (
-                img.complete &&
-                img.naturalWidth > 0
-            ) {
-
-                openImage(
-                    img.src,
-                    img.alt
+                console.log(
+                    `✅ ${page.image} โหลดสำเร็จ`
                 );
 
             }
+        );
 
-        });
+
+        img.addEventListener(
+            "error",
+            () => {
+
+                section.classList.add(
+                    "image-missing"
+                );
+
+
+                if (errorBox) {
+
+                    errorBox.style.display =
+                        "flex";
+
+                }
+
+
+                console.warn(
+                    `❌ ไม่พบรูป: ${imagePath}`
+                );
+
+            }
+        );
+
+
+        img.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    img.complete &&
+                    img.naturalWidth > 0
+                ) {
+
+                    openImage(
+                        img.src,
+                        img.alt
+                    );
+
+                }
+
+            }
+        );
 
     });
 
 
     /* =====================================================
-       🖼️ IMAGE VIEWER
-       ===================================================== */
+       🔍 IMAGE MODAL
+    ===================================================== */
 
     const modal =
         document.createElement("div");
 
-    modal.className = "image-modal";
+
+    modal.className =
+        "image-modal";
+
 
     modal.innerHTML = `
+
         <button
             class="modal-close"
-            aria-label="ปิด"
+            aria-label="ปิดรูป"
         >
             ×
         </button>
@@ -273,24 +343,41 @@ document.addEventListener("DOMContentLoaded", () => {
             class="modal-image"
             alt=""
         >
+
     `;
 
-    document.body.appendChild(modal);
+
+    document.body.appendChild(
+        modal
+    );
 
 
     const modalImage =
-        modal.querySelector(".modal-image");
+        modal.querySelector(
+            ".modal-image"
+        );
+
 
     const modalClose =
-        modal.querySelector(".modal-close");
+        modal.querySelector(
+            ".modal-close"
+        );
 
 
-    function openImage(src, alt) {
+    function openImage(
+        src,
+        alt
+    ) {
 
-        modalImage.src = src;
-        modalImage.alt = alt;
+        modalImage.src =
+            src;
 
-        modal.classList.add("active");
+        modalImage.alt =
+            alt;
+
+        modal.classList.add(
+            "active"
+        );
 
         document.body.style.overflow =
             "hidden";
@@ -299,7 +386,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeImage() {
 
-        modal.classList.remove("active");
+        modal.classList.remove(
+            "active"
+        );
 
         document.body.style.overflow =
             "";
@@ -319,7 +408,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (
                 event.target === modal
             ) {
+
                 closeImage();
+
             }
 
         }
@@ -330,8 +421,12 @@ document.addEventListener("DOMContentLoaded", () => {
         "keydown",
         (event) => {
 
-            if (event.key === "Escape") {
+            if (
+                event.key === "Escape"
+            ) {
+
                 closeImage();
+
             }
 
         }
@@ -340,24 +435,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        📱 MOBILE MENU
-       ===================================================== */
+    ===================================================== */
 
     const menuToggle =
-        document.querySelector(".menu-toggle");
+        document.querySelector(
+            ".menu-toggle"
+        );
+
 
     const navMenu =
-        document.querySelector(".nav-menu");
+        document.querySelector(
+            ".nav-menu"
+        );
 
 
-    if (menuToggle && navMenu) {
+    if (
+        menuToggle &&
+        navMenu
+    ) {
 
         menuToggle.addEventListener(
             "click",
             () => {
 
-                navMenu.classList.toggle("open");
+                navMenu.classList.toggle(
+                    "open"
+                );
 
-                menuToggle.classList.toggle("open");
+                menuToggle.classList.toggle(
+                    "open"
+                );
 
             }
         );
@@ -389,10 +496,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        📊 PROGRESS BAR
-       ===================================================== */
+    ===================================================== */
 
     const progressFill =
-        document.querySelector(".progress-fill");
+        document.querySelector(
+            ".progress-fill"
+        );
 
 
     function updateProgress() {
@@ -401,22 +510,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         const scrollTop =
             window.scrollY;
 
+
         const documentHeight =
-            document.documentElement.scrollHeight -
+            document.documentElement
+                .scrollHeight
+            -
             window.innerHeight;
 
 
         const progress =
             documentHeight > 0
-                ? (scrollTop / documentHeight) * 100
-                : 0;
+            ?
+            (scrollTop / documentHeight) * 100
+            :
+            0;
 
 
         progressFill.style.width =
             `${progress}%`;
+
     }
 
 
@@ -431,10 +547,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        🔝 BACK TO TOP
-       ===================================================== */
+    ===================================================== */
 
     const backToTop =
-        document.querySelector(".back-to-top");
+        document.querySelector(
+            ".back-to-top"
+        );
 
 
     if (backToTop) {
@@ -443,7 +561,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "scroll",
             () => {
 
-                if (window.scrollY > 500) {
+                if (
+                    window.scrollY > 500
+                ) {
 
                     backToTop.classList.add(
                         "show"
@@ -478,36 +598,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        ⏳ LOADER
-       ===================================================== */
+    ===================================================== */
 
     const loader =
-        document.getElementById("loader");
+        document.getElementById(
+            "loader"
+        );
 
 
     window.addEventListener(
         "load",
         () => {
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                if (loader) {
-                    loader.classList.add(
-                        "hidden"
-                    );
-                }
+                    if (loader) {
 
-            }, 500);
+                        loader.classList.add(
+                            "hidden"
+                        );
+
+                    }
+
+                },
+                600
+            );
 
         }
     );
 
 
     /* =====================================================
-       💙 CONSOLE
-       ===================================================== */
+       💜 CONSOLE
+    ===================================================== */
 
     console.log(
-        "💙 Wipada Portfolio พร้อมใช้งานแล้ว"
+        "💜 THANASORN PORTFOLIO READY"
     );
 
     console.log(
@@ -516,4 +643,3 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-```

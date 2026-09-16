@@ -1,316 +1,264 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================================
-       📁 IMAGE FOLDER
-    ===================================================== */
-
-    const folderName =
-        "สีแดงเข้ม โมเดิร์น แฟ้มสะสมผลงาน  พอร์ตโฟลิโอ Portfolio เอกสาร A4";
-
-    const imageFolder =
-        "./" + encodeURIComponent(folderName);
+```javascript
+/* =========================================
+   THANASORN PORTFOLIO
+========================================= */
 
 
-    /* =====================================================
-       📚 PORTFOLIO 13 PAGES
-    ===================================================== */
+/* =========================================
+   IMAGE FOLDER
+========================================= */
 
-    const pages = [
-
-        {
-            number: "01",
-            title: "",
-            image: "1.png",
-            id: "home",
-            alt: "หน้าปก Portfolio"
-        },
-
-        {
-            number: "02",
-            title: "STATEMENT OF PURPOSE",
-            image: "2.png",
-            id: "sop",
-            alt: "Statement of Purpose"
-        },
-
-        {
-            number: "03",
-            title: "PROFILE",
-            image: "3.png",
-            id: "profile",
-            alt: "ประวัติส่วนตัว"
-        },
-
-        {
-            number: "04",
-            title: "RELATED ACTIVITIES",
-            image: "4.png",
-            id: "activities",
-            alt: "Related Activities"
-        },
-
-        {
-            number: "05",
-            title: "HOSTING SKILLS",
-            image: "5.png",
-            id: "hosting",
-            alt: "Hosting Skills"
-        },
-
-        {
-            number: "06",
-            title: "STUDENT COUNCIL",
-            image: "6.png",
-            id: "student-council",
-            alt: "Student Council"
-        },
-
-        {
-            number: "07",
-            title: "ACTIVITY FACILITATOR",
-            image: "7.png",
-            id: "facilitator",
-            alt: "Activity Facilitator"
-        },
-
-        {
-            number: "08",
-            title: "ACTIVITY",
-            image: "8.png",
-            id: "activity-01",
-            alt: "Activity"
-        },
-
-        {
-            number: "09",
-            title: "ACTIVITY",
-            image: "9.png",
-            id: "activity-02",
-            alt: "Activity"
-        },
-
-        {
-            number: "10",
-            title: "VOLUNTEER ACTIVITIES",
-            image: "10.png",
-            id: "volunteer",
-            alt: "Volunteer Activities"
-        },
-
-        {
-            number: "11",
-            title: "SOCIAL & COMMUNITY ACTIVITIES",
-            image: "11.png",
-            id: "community",
-            alt: "Social and Community Activities"
-        },
-
-        {
-            number: "12",
-            title: "CERTIFICATE",
-            image: "12.png",
-            id: "certificates",
-            alt: "Certificate"
-        },
-
-        {
-            number: "13",
-            title: "",
-            image: "13.png",
-            id: "back-cover",
-            alt: "ปกหลัง"
-        }
-
-    ];
+const imageFolder =
+    "./สีแดงเข้ม%20โมเดิร์น%20แฟ้มสะสมผลงาน%20%20พอร์ตโฟลิโอ%20Portfolio%20เอกสาร%20A4";
 
 
-    /* =====================================================
-       🖼️ CREATE PAGES
-    ===================================================== */
+/* =========================================
+   MOBILE MENU
+========================================= */
 
-    const portfolioPages =
-        document.getElementById("portfolioPages");
+const menuToggle =
+    document.getElementById("menuToggle");
 
-
-    pages.forEach((page, index) => {
-
-        const section =
-            document.createElement("section");
+const navMenu =
+    document.getElementById("navMenu");
 
 
-        section.className =
-            "portfolio-page";
+menuToggle.addEventListener("click", () => {
+
+    navMenu.classList.toggle("active");
+
+});
 
 
-        if (index === 0) {
+/* ปิดเมนูเมื่อกดลิงก์ */
 
-            section.classList.add(
-                "cover-page"
+document
+    .querySelectorAll(".nav-menu a")
+    .forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("active");
+
+        });
+
+    });
+
+
+/* =========================================
+   BACK TO TOP
+========================================= */
+
+const backToTop =
+    document.getElementById("backToTop");
+
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 500) {
+
+        backToTop.classList.add("show");
+
+    } else {
+
+        backToTop.classList.remove("show");
+
+    }
+
+});
+
+
+backToTop.addEventListener("click", () => {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+});
+
+
+/* =========================================
+   IMAGE MODAL
+========================================= */
+
+const modal =
+    document.getElementById("imageModal");
+
+const modalImage =
+    document.getElementById("modalImage");
+
+const modalClose =
+    document.getElementById("modalClose");
+
+
+/* รูปที่มี class zoomable */
+
+document
+    .querySelectorAll(".zoomable")
+    .forEach((image) => {
+
+        image.addEventListener("click", () => {
+
+            modalImage.src = image.src;
+            modalImage.alt = image.alt;
+
+            modal.classList.add("active");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
             );
 
-        }
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
 
 
-        if (index === pages.length - 1) {
+/* รูปใน Gallery */
 
-            section.classList.add(
-                "back-cover"
+document
+    .querySelectorAll(".gallery-item")
+    .forEach((item) => {
+
+        item.addEventListener("click", () => {
+
+            const image =
+                item.querySelector("img");
+
+            modalImage.src = image.src;
+            modalImage.alt = image.alt;
+
+            modal.classList.add("active");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
             );
 
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
+
+
+/* ปิด Modal */
+
+function closeModal() {
+
+    modal.classList.remove("active");
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    modalImage.src = "";
+
+    document.body.style.overflow = "";
+
+}
+
+
+modalClose.addEventListener(
+    "click",
+    closeModal
+);
+
+
+modal.addEventListener(
+    "click",
+    (event) => {
+
+        if (event.target === modal) {
+
+            closeModal();
+
         }
 
-
-        section.id =
-            page.id;
-
-
-        const imagePath =
-            `${imageFolder}/${page.image}`;
+    }
+);
 
 
-        section.innerHTML = `
+/* =========================================
+   ESC CLOSE MODAL
+========================================= */
 
-            <div class="page-image">
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-                <img
-                    src="${imagePath}"
-                    alt="${page.alt}"
-                    loading="${
-                        index === 0
-                        ? "eager"
-                        : "lazy"
-                    }"
-                >
+        if (event.key === "Escape") {
 
-                <div class="image-error">
+            closeModal();
 
-                    <strong>
-                        ${page.number}
-                    </strong>
+        }
 
-                    <span>
-                        ไม่พบรูป ${page.image}
-                    </span>
-
-                </div>
-
-            </div>
+    }
+);
 
 
-            ${
-                page.title
-                ?
-                `
-                <div class="page-label">
+/* =========================================
+   SMOOTH SCROLL
+========================================= */
 
-                    <span>
-                        ${page.number}
-                    </span>
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((link) => {
 
-                    <h2>
-                        ${page.title}
-                    </h2>
+        link.addEventListener("click", (event) => {
 
-                </div>
-                `
-                :
-                ""
-            }
+            const targetId =
+                link.getAttribute("href");
 
+            const target =
+                document.querySelector(targetId);
 
-            <div class="page-number">
+            if (!target) return;
 
-                ${page.number} / 13
+            event.preventDefault();
 
-            </div>
+            target.scrollIntoView({
 
-        `;
+                behavior: "smooth",
 
+                block: "start"
 
-        portfolioPages.appendChild(
-            section
-        );
+            });
+
+        });
+
+    });
 
 
-        /* =================================================
-           IMAGE EVENTS
-        ================================================= */
+/* =========================================
+   IMAGE ERROR HANDLER
+========================================= */
 
-        const img =
-            section.querySelector("img");
+document
+    .querySelectorAll("img")
+    .forEach((image) => {
 
-
-        const errorBox =
-            section.querySelector(
-                ".image-error"
-            );
-
-
-        img.addEventListener(
-            "load",
-            () => {
-
-                section.classList.add(
-                    "image-loaded"
-                );
-
-
-                if (errorBox) {
-
-                    errorBox.style.display =
-                        "none";
-
-                }
-
-
-                console.log(
-                    `✅ ${page.image} โหลดสำเร็จ`
-                );
-
-            }
-        );
-
-
-        img.addEventListener(
+        image.addEventListener(
             "error",
             () => {
 
-                section.classList.add(
-                    "image-missing"
-                );
+                image.style.background =
+                    "#ffffff";
 
-
-                if (errorBox) {
-
-                    errorBox.style.display =
-                        "flex";
-
-                }
-
+                image.alt =
+                    "ไม่พบรูปภาพ";
 
                 console.warn(
-                    `❌ ไม่พบรูป: ${imagePath}`
+                    "ไม่พบรูป:",
+                    image.src
                 );
-
-            }
-        );
-
-
-        img.addEventListener(
-            "click",
-            () => {
-
-                if (
-                    img.complete &&
-                    img.naturalWidth > 0
-                ) {
-
-                    openImage(
-                        img.src,
-                        img.alt
-                    );
-
-                }
 
             }
         );
@@ -318,328 +266,87 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =====================================================
-       🔍 IMAGE MODAL
-    ===================================================== */
+/* =========================================
+   ACTIVE NAVIGATION
+========================================= */
 
-    const modal =
-        document.createElement("div");
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
 
-
-    modal.className =
-        "image-modal";
-
-
-    modal.innerHTML = `
-
-        <button
-            class="modal-close"
-            aria-label="ปิดรูป"
-        >
-            ×
-        </button>
-
-        <img
-            class="modal-image"
-            alt=""
-        >
-
-    `;
-
-
-    document.body.appendChild(
-        modal
+const navLinks =
+    document.querySelectorAll(
+        ".nav-menu a"
     );
 
 
-    const modalImage =
-        modal.querySelector(
-            ".modal-image"
-        );
+const observer =
+    new IntersectionObserver(
+        (entries) => {
 
+            entries.forEach((entry) => {
 
-    const modalClose =
-        modal.querySelector(
-            ".modal-close"
-        );
+                if (!entry.isIntersecting) {
+                    return;
+                }
 
+                navLinks.forEach((link) => {
 
-    function openImage(
-        src,
-        alt
-    ) {
+                    link.classList.remove(
+                        "active"
+                    );
 
-        modalImage.src =
-            src;
+                    const href =
+                        link.getAttribute("href");
 
-        modalImage.alt =
-            alt;
+                    if (
+                        href ===
+                        "#" + entry.target.id
+                    ) {
 
-        modal.classList.add(
-            "active"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-    }
-
-
-    function closeImage() {
-
-        modal.classList.remove(
-            "active"
-        );
-
-        document.body.style.overflow =
-            "";
-    }
-
-
-    modalClose.addEventListener(
-        "click",
-        closeImage
-    );
-
-
-    modal.addEventListener(
-        "click",
-        (event) => {
-
-            if (
-                event.target === modal
-            ) {
-
-                closeImage();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                closeImage();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       📱 MOBILE MENU
-    ===================================================== */
-
-    const menuToggle =
-        document.querySelector(
-            ".menu-toggle"
-        );
-
-
-    const navMenu =
-        document.querySelector(
-            ".nav-menu"
-        );
-
-
-    if (
-        menuToggle &&
-        navMenu
-    ) {
-
-        menuToggle.addEventListener(
-            "click",
-            () => {
-
-                navMenu.classList.toggle(
-                    "open"
-                );
-
-                menuToggle.classList.toggle(
-                    "open"
-                );
-
-            }
-        );
-
-
-        navMenu
-            .querySelectorAll("a")
-            .forEach((link) => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        navMenu.classList.remove(
-                            "open"
-                        );
-
-                        menuToggle.classList.remove(
-                            "open"
+                        link.classList.add(
+                            "active"
                         );
 
                     }
-                );
+
+                });
 
             });
 
-    }
-
-
-    /* =====================================================
-       📊 PROGRESS BAR
-    ===================================================== */
-
-    const progressFill =
-        document.querySelector(
-            ".progress-fill"
-        );
-
-
-    function updateProgress() {
-
-        if (!progressFill) {
-            return;
-        }
-
-
-        const scrollTop =
-            window.scrollY;
-
-
-        const documentHeight =
-            document.documentElement
-                .scrollHeight
-            -
-            window.innerHeight;
-
-
-        const progress =
-            documentHeight > 0
-            ?
-            (scrollTop / documentHeight) * 100
-            :
-            0;
-
-
-        progressFill.style.width =
-            `${progress}%`;
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateProgress
-    );
-
-
-    updateProgress();
-
-
-    /* =====================================================
-       🔝 BACK TO TOP
-    ===================================================== */
-
-    const backToTop =
-        document.querySelector(
-            ".back-to-top"
-        );
-
-
-    if (backToTop) {
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (
-                    window.scrollY > 500
-                ) {
-
-                    backToTop.classList.add(
-                        "show"
-                    );
-
-                } else {
-
-                    backToTop.classList.remove(
-                        "show"
-                    );
-
-                }
-
-            }
-        );
-
-
-        backToTop.addEventListener(
-            "click",
-            () => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ⏳ LOADER
-    ===================================================== */
-
-    const loader =
-        document.getElementById(
-            "loader"
-        );
-
-
-    window.addEventListener(
-        "load",
-        () => {
-
-            setTimeout(
-                () => {
-
-                    if (loader) {
-
-                        loader.classList.add(
-                            "hidden"
-                        );
-
-                    }
-
-                },
-                600
-            );
-
+        },
+        {
+            threshold: 0.25
         }
     );
 
 
-    /* =====================================================
-       💜 CONSOLE
-    ===================================================== */
+sections.forEach((section) => {
 
-    console.log(
-        "💜 THANASORN PORTFOLIO READY"
-    );
-
-    console.log(
-        "📁 Image folder:",
-        folderName
-    );
+    observer.observe(section);
 
 });
+
+
+/* =========================================
+   IMAGE LAZY LOADING
+========================================= */
+
+document
+    .querySelectorAll("img")
+    .forEach((image) => {
+
+        image.loading = "lazy";
+
+    });
+
+
+/* =========================================
+   CONSOLE
+========================================= */
+
+console.log(
+    "THANASORN Portfolio loaded successfully 💜"
+);
+```

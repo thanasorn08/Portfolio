@@ -1,4 +1,3 @@
-```javascript
 /* =========================================
    THANASORN PORTFOLIO
 ========================================= */
@@ -8,77 +7,254 @@
    IMAGE FOLDER
 ========================================= */
 
+/*
+   สำคัญมาก!
+
+   ชื่อโฟลเดอร์ใน GitHub ของเธอคือ
+
+   สีแดงเข้ม โมเดิร์น แฟ้มสะสมผลงาน  พอร์ตโฟลิโอ Portfolio เอกสาร A4
+
+   มี "เว้นวรรค 2 ช่อง" ระหว่าง ผลงาน กับ พอร์ตโฟลิโอ
+
+   encodeURIComponent()
+   จะช่วยจัดการภาษาไทยและช่องว่าง
+*/
+
+const folderName =
+    "สีแดงเข้ม โมเดิร์น แฟ้มสะสมผลงาน  พอร์ตโฟลิโอ Portfolio เอกสาร A4";
+
+
 const imageFolder =
-    "./สีแดงเข้ม%20โมเดิร์น%20แฟ้มสะสมผลงาน%20%20พอร์ตโฟลิโอ%20Portfolio%20เอกสาร%20A4";
+    "./" + encodeURIComponent(folderName);
 
 
 /* =========================================
-   MOBILE MENU
+   IMAGE PATH FUNCTION
 ========================================= */
 
-const menuToggle =
-    document.getElementById("menuToggle");
+function getImage(number) {
 
-const navMenu =
-    document.getElementById("navMenu");
+    return imageFolder + "/" + number + ".png";
 
-
-menuToggle.addEventListener("click", () => {
-
-    navMenu.classList.toggle("active");
-
-});
-
-
-/* ปิดเมนูเมื่อกดลิงก์ */
-
-document
-    .querySelectorAll(".nav-menu a")
-    .forEach((link) => {
-
-        link.addEventListener("click", () => {
-
-            navMenu.classList.remove("active");
-
-        });
-
-    });
+}
 
 
 /* =========================================
-   BACK TO TOP
+   SET MAIN IMAGES
 ========================================= */
 
-const backToTop =
-    document.getElementById("backToTop");
+const heroImage =
+    document.getElementById("heroImage");
+
+const profileImage =
+    document.getElementById("profileImage");
+
+const educationImage =
+    document.getElementById("educationImage");
+
+const sopImage =
+    document.getElementById("sopImage");
 
 
-window.addEventListener("scroll", () => {
+/*
+   หน้า 1 = Cover
+*/
 
-    if (window.scrollY > 500) {
+heroImage.src =
+    getImage(1);
 
-        backToTop.classList.add("show");
 
-    } else {
+/*
+   หน้า 3 = Profile
+*/
 
-        backToTop.classList.remove("show");
+profileImage.src =
+    getImage(3);
 
+
+/*
+   หน้า 2 = Education / เอกสาร
+*/
+
+educationImage.src =
+    getImage(2);
+
+
+/*
+   ใช้หน้า 2 เป็นภาพ SOP
+   สามารถเปลี่ยนเลขได้ภายหลัง
+*/
+
+sopImage.src =
+    getImage(2);
+
+
+/* =========================================
+   ACTIVITIES
+========================================= */
+
+const activityGrid =
+    document.getElementById("activityGrid");
+
+
+const activities = [
+
+    {
+        number: "01",
+        title: "RELATED ACTIVITIES",
+        description:
+            "กิจกรรมและประสบการณ์ที่รวบรวมไว้ใน Portfolio",
+        image: 4
+    },
+
+    {
+        number: "02",
+        title: "HOSTING SKILLS",
+        description:
+            "ประสบการณ์ด้านการสื่อสารและการนำเสนอ",
+        image: 5
+    },
+
+    {
+        number: "03",
+        title: "STUDENT COUNCIL",
+        description:
+            "ประสบการณ์การทำงานร่วมกับผู้อื่น",
+        image: 6
+    },
+
+    {
+        number: "04",
+        title: "ACTIVITY FACILITATOR",
+        description:
+            "การช่วยเหลือและอำนวยความสะดวกในกิจกรรม",
+        image: 7
+    },
+
+    {
+        number: "05",
+        title: "ACTIVITY",
+        description:
+            "กิจกรรมและประสบการณ์ต่าง ๆ",
+        image: 8
+    },
+
+    {
+        number: "06",
+        title: "ACTIVITY",
+        description:
+            "ผลงานและประสบการณ์จากกิจกรรม",
+        image: 9
+    },
+
+    {
+        number: "07",
+        title: "VOLUNTEER ACTIVITIES",
+        description:
+            "กิจกรรมจิตอาสาและการทำประโยชน์เพื่อส่วนรวม",
+        image: 10
+    },
+
+    {
+        number: "08",
+        title: "SOCIAL & COMMUNITY ACTIVITIES",
+        description:
+            "กิจกรรมเพื่อสังคมและชุมชน",
+        image: 11
     }
 
+];
+
+
+/* สร้าง Activity Card */
+
+activities.forEach((activity) => {
+
+
+    const article =
+        document.createElement("article");
+
+
+    article.className =
+        "activity-card";
+
+
+    article.innerHTML = `
+
+        <div class="activity-number">
+            ${activity.number}
+        </div>
+
+        <h3>
+            ${activity.title}
+        </h3>
+
+        <p>
+            ${activity.description}
+        </p>
+
+        <img
+            src="${getImage(activity.image)}"
+            alt="${activity.title}"
+            class="zoomable"
+        >
+
+    `;
+
+
+    activityGrid.appendChild(article);
+
 });
 
 
-backToTop.addEventListener("click", () => {
+/* =========================================
+   GALLERY
+========================================= */
 
-    window.scrollTo({
+const galleryGrid =
+    document.getElementById("galleryGrid");
 
-        top: 0,
 
-        behavior: "smooth"
+/*
+   สร้าง Gallery หน้า 1 - 11
+*/
 
-    });
+for (
+    let number = 1;
+    number <= 11;
+    number++
+) {
 
-});
+
+    const button =
+        document.createElement("button");
+
+
+    button.className =
+        "gallery-item";
+
+
+    button.type =
+        "button";
+
+
+    button.innerHTML = `
+
+        <img
+            src="${getImage(number)}"
+            alt="Portfolio หน้า ${number}"
+        >
+
+        <span class="gallery-number">
+            ${String(number).padStart(2, "0")}
+        </span>
+
+    `;
+
+
+    galleryGrid.appendChild(button);
+
+}
 
 
 /* =========================================
@@ -88,76 +264,96 @@ backToTop.addEventListener("click", () => {
 const modal =
     document.getElementById("imageModal");
 
+
 const modalImage =
     document.getElementById("modalImage");
+
 
 const modalClose =
     document.getElementById("modalClose");
 
 
-/* รูปที่มี class zoomable */
+/*
+   ฟังก์ชันเปิดรูป
+*/
 
-document
-    .querySelectorAll(".zoomable")
-    .forEach((image) => {
+function openModal(image) {
 
-        image.addEventListener("click", () => {
+    modalImage.src =
+        image.src;
 
-            modalImage.src = image.src;
-            modalImage.alt = image.alt;
+    modalImage.alt =
+        image.alt;
 
-            modal.classList.add("active");
+    modal.classList.add("active");
 
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
+    document.body.style.overflow =
+        "hidden";
 
-            document.body.style.overflow = "hidden";
-
-        });
-
-    });
+}
 
 
-/* รูปใน Gallery */
+/*
+   รูปทั่วไป
+*/
 
-document
-    .querySelectorAll(".gallery-item")
-    .forEach((item) => {
+document.addEventListener(
+    "click",
+    (event) => {
 
-        item.addEventListener("click", () => {
-
-            const image =
-                item.querySelector("img");
-
-            modalImage.src = image.src;
-            modalImage.alt = image.alt;
-
-            modal.classList.add("active");
-
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
-            document.body.style.overflow = "hidden";
-
-        });
-
-    });
+        const image =
+            event.target.closest(".zoomable");
 
 
-/* ปิด Modal */
+        if (!image) {
+            return;
+        }
+
+
+        openModal(image);
+
+    }
+);
+
+
+/*
+   รูป Gallery
+*/
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const gallery =
+            event.target.closest(".gallery-item");
+
+
+        if (!gallery) {
+            return;
+        }
+
+
+        const image =
+            gallery.querySelector("img");
+
+
+        if (image) {
+
+            openModal(image);
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
 
 function closeModal() {
 
     modal.classList.remove("active");
-
-    modal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
 
     modalImage.src = "";
 
@@ -176,7 +372,9 @@ modal.addEventListener(
     "click",
     (event) => {
 
-        if (event.target === modal) {
+        if (
+            event.target === modal
+        ) {
 
             closeModal();
 
@@ -186,15 +384,17 @@ modal.addEventListener(
 );
 
 
-/* =========================================
-   ESC CLOSE MODAL
-========================================= */
+/*
+   กด ESC เพื่อปิด
+*/
 
 document.addEventListener(
     "keydown",
     (event) => {
 
-        if (event.key === "Escape") {
+        if (
+            event.key === "Escape"
+        ) {
 
             closeModal();
 
@@ -205,59 +405,43 @@ document.addEventListener(
 
 
 /* =========================================
-   SMOOTH SCROLL
+   MOBILE MENU
 ========================================= */
 
+const menuToggle =
+    document.getElementById("menuToggle");
+
+
+const navMenu =
+    document.getElementById("navMenu");
+
+
+menuToggle.addEventListener(
+    "click",
+    () => {
+
+        navMenu.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+/*
+   กดเมนูแล้วปิด Mobile Menu
+*/
+
 document
-    .querySelectorAll('a[href^="#"]')
+    .querySelectorAll(".nav-menu a")
     .forEach((link) => {
 
-        link.addEventListener("click", (event) => {
-
-            const targetId =
-                link.getAttribute("href");
-
-            const target =
-                document.querySelector(targetId);
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-
-                behavior: "smooth",
-
-                block: "start"
-
-            });
-
-        });
-
-    });
-
-
-/* =========================================
-   IMAGE ERROR HANDLER
-========================================= */
-
-document
-    .querySelectorAll("img")
-    .forEach((image) => {
-
-        image.addEventListener(
-            "error",
+        link.addEventListener(
+            "click",
             () => {
 
-                image.style.background =
-                    "#ffffff";
-
-                image.alt =
-                    "ไม่พบรูปภาพ";
-
-                console.warn(
-                    "ไม่พบรูป:",
-                    image.src
+                navMenu.classList.remove(
+                    "active"
                 );
 
             }
@@ -267,13 +451,62 @@ document
 
 
 /* =========================================
-   ACTIVE NAVIGATION
+   BACK TO TOP
+========================================= */
+
+const backToTop =
+    document.getElementById("backToTop");
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 500
+        ) {
+
+            backToTop.classList.add(
+                "show"
+            );
+
+        } else {
+
+            backToTop.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+backToTop.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+);
+
+
+/* =========================================
+   ACTIVE NAV
 ========================================= */
 
 const sections =
     document.querySelectorAll(
         "section[id]"
     );
+
 
 const navLinks =
     document.querySelectorAll(
@@ -283,63 +516,94 @@ const navLinks =
 
 const observer =
     new IntersectionObserver(
+
         (entries) => {
 
-            entries.forEach((entry) => {
-
-                if (!entry.isIntersecting) {
-                    return;
-                }
-
-                navLinks.forEach((link) => {
-
-                    link.classList.remove(
-                        "active"
-                    );
-
-                    const href =
-                        link.getAttribute("href");
+            entries.forEach(
+                (entry) => {
 
                     if (
-                        href ===
-                        "#" + entry.target.id
+                        !entry.isIntersecting
                     ) {
 
-                        link.classList.add(
-                            "active"
-                        );
+                        return;
 
                     }
 
-                });
 
-            });
+                    navLinks.forEach(
+                        (link) => {
+
+                            link.classList.remove(
+                                "active"
+                            );
+
+
+                            if (
+                                link.getAttribute(
+                                    "href"
+                                ) ===
+                                "#" +
+                                entry.target.id
+                            ) {
+
+                                link.classList.add(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
 
         },
+
         {
-            threshold: 0.25
+            threshold: 0.3
         }
+
     );
 
 
-sections.forEach((section) => {
+sections.forEach(
+    (section) => {
 
-    observer.observe(section);
+        observer.observe(
+            section
+        );
 
-});
+    }
+);
 
 
 /* =========================================
-   IMAGE LAZY LOADING
+   IMAGE ERROR CHECK
 ========================================= */
 
-document
-    .querySelectorAll("img")
-    .forEach((image) => {
+document.addEventListener(
+    "error",
+    (event) => {
 
-        image.loading = "lazy";
+        if (
+            event.target.tagName !== "IMG"
+        ) {
 
-    });
+            return;
+
+        }
+
+
+        console.warn(
+            "ไม่พบรูป:",
+            event.target.src
+        );
+
+    },
+    true
+);
 
 
 /* =========================================
@@ -347,6 +611,5 @@ document
 ========================================= */
 
 console.log(
-    "THANASORN Portfolio loaded successfully 💜"
+    "THANASORN Portfolio พร้อมใช้งาน 💜"
 );
-```

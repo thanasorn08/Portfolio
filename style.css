@@ -1737,5 +1737,102 @@ button {
         padding: 15px;
 
     }
+/* =========================================
+   FIX HERO TEXT - THANASORN
+   ใส่ไว้ท้ายสุดของ style.css
+========================================= */
 
+/* ชื่อ THANASORN */
+.hero h1 {
+    color: #6f35b5 !important;
+
+    background: linear-gradient(
+        90deg,
+        #54247d 0%,
+        #793bc2 45%,
+        #a45cff 100%
+    ) !important;
+
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+
+    -webkit-text-fill-color: transparent !important;
+
+    opacity: 1 !important;
+
+    text-shadow: none !important;
+}
+
+
+/* ชื่อภาษาไทย */
+.hero h2 {
+    color: #3d294b !important;
+
+    opacity: 1 !important;
+
+    -webkit-text-fill-color: #3d294b !important;
+}
+
+
+/* PORTFOLIO ด้านบน */
+.hero .eyebrow {
+    color: #3f3348 !important;
+
+    opacity: 1 !important;
+}
+
+
+/* ข้อความแนะนำตัว */
+.hero .hero-description {
+    color: #4d4354 !important;
+
+    opacity: 1 !important;
+}
+
+
+/* ปุ่มรู้จักฉัน */
+.hero .btn-primary {
+    color: #ffffff !important;
+
+    background: linear-gradient(
+        135deg,
+        #9b55ed,
+        #7138bd
+    ) !important;
+
+    border: 2px solid #8c4bd7 !important;
+}
+
+
+/* ปุ่มดูผลงาน */
+.hero .btn-outline {
+    display: inline-flex !important;
+
+    color: #7138bd !important;
+
+    background: #ffffff !important;
+
+    border: 2px solid #7138bd !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+.hero .btn-outline:hover {
+    color: #ffffff !important;
+
+    background: #7138bd !important;
+}
+
+
+/* รูปด้านขวา */
+.hero .image-frame {
+    background: linear-gradient(
+        135deg,
+        #d9baff,
+        #9c5be8
+    ) !important;
+}
 }

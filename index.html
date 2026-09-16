@@ -5,57 +5,328 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>THANASORN | Portfolio</title>
+    <title>Portfolio | THANASORN</title>
+
+    <meta
+        name="description"
+        content="Portfolio ของ นางสาวธนสร เกตุฉิม"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Loading -->
-    <div id="loader">
-        <div class="loader-box">
-            <div class="loader-circle"></div>
-            <p>Loading Portfolio...</p>
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="#home" class="logo">
+                <span>THANASORN</span>
+                <small>PORTFOLIO</small>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="เปิดเมนู"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+
+                <a href="#home">หน้าแรก</a>
+                <a href="#profile">ประวัติ</a>
+                <a href="#education">การศึกษา</a>
+                <a href="#activities">กิจกรรม</a>
+                <a href="#certificates">เกียรติบัตร</a>
+                <a href="#sop">SOP</a>
+                <a href="#gallery">ผลงาน</a>
+
+            </nav>
+
         </div>
-    </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
+    </header>
 
-        <div class="logo">
-            THANASORN
-        </div>
 
-        <button class="menu-btn" id="menuBtn">
-            ☰
-        </button>
+    <!-- =========================
+         HERO
+    ========================== -->
+    <main>
 
-        <div class="nav-links" id="navLinks">
-            <a href="#home">HOME</a>
-            <a href="#sop">SOP</a>
-            <a href="#profile">PROFILE</a>
-            <a href="#activities">ACTIVITIES</a>
-            <a href="#certificate">CERTIFICATE</a>
-        </div>
+        <section class="hero section" id="home">
 
-    </nav>
+            <div class="hero-content">
 
-    <!-- Progress -->
-    <div class="progress">
-        <div id="progressBar"></div>
-    </div>
+                <div class="hero-text">
 
-    <!-- Portfolio -->
-    <main id="portfolioPages"></main>
+                    <p class="eyebrow">
+                        PORTFOLIO
+                    </p>
 
-    <!-- Back To Top -->
-    <button id="topBtn" title="กลับด้านบน">
-        ↑
-    </button>
+                    <h1>
+                        THANASORN
+                    </h1>
 
-    <script src="script.js"></script>
+                    <h2>
+                        นางสาวธนสร เกตุฉิม
+                    </h2>
 
-</body>
-</html>
+                    <p class="hero-description">
+                        แฟ้มสะสมผลงาน
+                        <br>
+                        รวบรวมประสบการณ์ กิจกรรม
+                        ผลงาน และการเรียนรู้
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#profile"
+                            class="btn btn-primary"
+                        >
+                            รู้จักฉัน
+                        </a>
+
+                        <a
+                            href="#gallery"
+                            class="btn btn-outline"
+                        >
+                            ดูผลงาน
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-image">
+
+                    <div class="image-frame">
+
+                        <img
+                            src="สีแดงเข้ม%20โมเดิร์น%20แฟ้มสะสมผลงาน%20%20พอร์ตโฟลิโอ%20Portfolio%20เอกสาร%20A4/1.png"
+                            alt="หน้าปก Portfolio ของ THANASORN"
+                            id="heroImage"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="scroll-hint">
+                <span>SCROLL</span>
+                <span class="arrow">↓</span>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROFILE
+        ========================== -->
+        <section class="section content-section" id="profile">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span>01</span>
+                    <h2>Profile</h2>
+                    <p>ประวัติและข้อมูลส่วนตัว</p>
+                </div>
+
+
+                <div class="profile-grid">
+
+                    <div class="profile-image card">
+
+                        <img
+                            src="สีแดงเข้ม%20โมเดิร์น%20แฟ้มสะสมผลงาน%20%20พอร์ตโฟลิโอ%20Portfolio%20เอกสาร%20A4/3.png"
+                            alt="ประวัติส่วนตัว Portfolio"
+                            class="zoomable"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-info">
+
+                        <div class="info-card">
+
+                            <span class="card-label">
+                                ABOUT ME
+                            </span>
+
+                            <h3>
+                                เกี่ยวกับฉัน
+                            </h3>
+
+                            <p>
+                                ดิฉันเป็นนักเรียนที่มุ่งมั่นในการเรียนรู้
+                                และพัฒนาตนเองผ่านการศึกษา กิจกรรม
+                                และประสบการณ์ต่าง ๆ
+                                พร้อมเปิดรับโอกาสใหม่ ๆ
+                                เพื่อพัฒนาความสามารถของตนเอง
+                            </p>
+
+                        </div>
+
+
+                        <div class="info-card">
+
+                            <span class="card-label">
+                                PERSONAL INFORMATION
+                            </span>
+
+                            <h3>
+                                ข้อมูลส่วนตัว
+                            </h3>
+
+                            <ul class="info-list">
+
+                                <li>
+                                    <strong>ชื่อ</strong>
+                                    <span>นางสาวธนสร เกตุฉิม</span>
+                                </li>
+
+                                <li>
+                                    <strong>ระดับชั้น</strong>
+                                    <span>มัธยมศึกษาปีที่ 6/1</span>
+                                </li>
+
+                                <li>
+                                    <strong>สถานศึกษา</strong>
+                                    <span>โรงเรียนกระทุ่มแบน “วิเศษสมุทคุณ”</span>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             EDUCATION
+        ========================== -->
+        <section class="section alt-section" id="education">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span>02</span>
+                    <h2>Education</h2>
+                    <p>ประวัติการศึกษาและเอกสารประกอบ</p>
+                </div>
+
+
+                <div class="document-layout">
+
+                    <div class="document-text">
+
+                        <div class="number-box">
+                            02
+                        </div>
+
+                        <h3>
+                            ประวัติการศึกษา
+                        </h3>
+
+                        <p>
+                            รวบรวมข้อมูลด้านการศึกษา
+                            และเอกสารประกอบการเรียนรู้
+                            ที่แสดงถึงเส้นทางการศึกษา
+                            และการพัฒนาตนเอง
+                        </p>
+
+                        <div class="education-detail">
+
+                            <div>
+                                <span>ระดับการศึกษา</span>
+                                <strong>มัธยมศึกษาตอนปลาย</strong>
+                            </div>
+
+                            <div>
+                                <span>ชั้น</span>
+                                <strong>ม.6/1</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="document-image card">
+
+                        <img
+                            src="สีแดงเข้ม%20โมเดิร์น%20แฟ้มสะสมผลงาน%20%20พอร์ตโฟลิโอ%20Portfolio%20เอกสาร%20A4/2.png"
+                            alt="เอกสารการศึกษา"
+                            class="zoomable"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ACTIVITIES
+        ========================== -->
+        <section class="section content-section" id="activities">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span>03</span>
+                    <h2>Activities</h2>
+                    <p>กิจกรรมและประสบการณ์</p>
+                </div>
+
+
+                <div class="activity-grid">
+
+                    <article class="activity-card">
+
+                        <div class="activity-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Related Activities
+                        </h3>
+
+                        <p>
+                            กิจกรรมที่สะท้อนถึงการเรียนรู้
+                            ความสนใจ และประสบการณ์
+                            จากการเข้าร่วมกิจกรรมต่าง ๆ
+                        </p>
+
+                        <img
 ```

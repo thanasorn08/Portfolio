@@ -1,2 +1,3 @@
 # Portfolio
-[หน้าปก](หน้าปก.md)
+
+[หน้าปก](https://467002-rgb.github.io/myportforio/)

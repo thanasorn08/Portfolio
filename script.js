@@ -1,10 +1,12 @@
 /* =========================================
-   รูปจาก Portfolio ของเพื่อน
-========================================= */
+   PORTFOLIO IMAGE MAPPING
+   ========================================= */
+
+const folderName =
+    "นางสาวธนสร เกตุฉิม เลขที่38";
 
 const imageFolder =
-    "https://thanasorn08.github.io/Portfolio/" +
-    encodeURIComponent("นางสาวธนสร เกตุฉิม เลขที่38");
+    "./" + encodeURIComponent(folderName);
 
 function getImage(number) {
     return imageFolder + "/" + number + ".png";
@@ -12,21 +14,59 @@ function getImage(number) {
 
 
 /* =========================================
-   รูปหลัก
-========================================= */
+   MAIN PAGES
+   ========================================= */
 
-document.getElementById("heroImage").src = getImage(1);
+// หน้าปก
+const heroImage =
+    document.getElementById("heroImage");
 
-document.getElementById("profileImage").src = getImage(2);
+if (heroImage) {
+    heroImage.src = getImage(1);
+    heroImage.alt = "หน้าปก Portfolio";
+}
 
-document.getElementById("educationImage").src = getImage(3);
 
-document.getElementById("sopImage").src = getImage(4);
+// ประวัติส่วนตัว
+const profileImage =
+    document.getElementById("profileImage");
+
+if (profileImage) {
+    profileImage.src = getImage(3);
+    profileImage.alt = "ประวัติส่วนตัว";
+}
+
+
+// Statement of Purpose
+const sopImage =
+    document.getElementById("sopImage");
+
+if (sopImage) {
+    sopImage.src = getImage(2);
+    sopImage.alt = "Statement of Purpose";
+}
+
+
+/* =========================================
+   EDUCATION
+   ไม่มีรูปหน้าพอร์ตที่กำหนดไว้
+   ========================================= */
+
+// ถ้าใน HTML มี educationImage
+// ให้ซ่อนรูปไว้ เพราะไม่มีหน้า Education
+// ในลำดับพอร์ตที่เตงให้มา
+
+const educationImage =
+    document.getElementById("educationImage");
+
+if (educationImage) {
+    educationImage.style.display = "none";
+}
 
 
 /* =========================================
    ACTIVITIES
-========================================= */
+   ========================================= */
 
 const activityGrid =
     document.getElementById("activityGrid");
@@ -35,97 +75,124 @@ const activities = [
     {
         number: "01",
         title: "RELATED ACTIVITIES",
-        description: "กิจกรรมและประสบการณ์ที่รวบรวมไว้ใน Portfolio",
-        image: 5
+        description: "กิจกรรมและประสบการณ์",
+        image: 4
     },
+
     {
         number: "02",
         title: "HOSTING SKILLS",
-        description: "ประสบการณ์ด้านการสื่อสารและการนำเสนอ",
-        image: 6
+        description: "ทักษะด้านการสื่อสารและการนำเสนอ",
+        image: 5
     },
+
     {
         number: "03",
         title: "STUDENT COUNCIL",
         description: "ประสบการณ์การทำงานร่วมกับผู้อื่น",
-        image: 7
+        image: 6
     },
+
     {
         number: "04",
         title: "ACTIVITY FACILITATOR",
-        description: "การช่วยเหลือและอำนวยความสะดวกในกิจกรรม",
-        image: 8
+        description: "การจัดกิจกรรมและการทำงานร่วมกับผู้อื่น",
+        image: 7
     }
 ];
 
-activities.forEach((activity) => {
+if (activityGrid) {
 
-    const article =
-        document.createElement("article");
+    activityGrid.innerHTML = "";
 
-    article.className =
-        "activity-card";
+    activities.forEach((activity) => {
 
-    article.innerHTML = `
-        <div class="activity-number">
-            ${activity.number}
-        </div>
+        const article =
+            document.createElement("article");
 
-        <h3>
-            ${activity.title}
-        </h3>
+        article.className =
+            "activity-card";
 
-        <p>
-            ${activity.description}
-        </p>
+        article.innerHTML = `
+            <div class="activity-number">
+                ${activity.number}
+            </div>
 
-        <img
-            src="${getImage(activity.image)}"
-            alt="${activity.title}"
-            class="zoomable"
-        >
-    `;
+            <h3>
+                ${activity.title}
+            </h3>
 
-    activityGrid.appendChild(article);
-});
+            <p>
+                ${activity.description}
+            </p>
+
+            <img
+                src="${getImage(activity.image)}"
+                alt="${activity.title}"
+                class="zoomable"
+            >
+        `;
+
+        activityGrid.appendChild(article);
+
+    });
+}
 
 
 /* =========================================
-   GALLERY 1 - 13
-========================================= */
+   CERTIFICATE
+   ========================================= */
+
+const certificateImage =
+    document.getElementById("certificateImage");
+
+if (certificateImage) {
+    certificateImage.src = getImage(12);
+    certificateImage.alt = "Certificate";
+}
+
+
+/* =========================================
+   GALLERY
+   แสดงพอร์ตครบ 1 - 13
+   ========================================= */
 
 const galleryGrid =
     document.getElementById("galleryGrid");
 
-for (let number = 1; number <= 13; number++) {
+if (galleryGrid) {
 
-    const button =
-        document.createElement("button");
+    galleryGrid.innerHTML = "";
 
-    button.className =
-        "gallery-item";
+    for (let number = 1; number <= 13; number++) {
 
-    button.type =
-        "button";
+        const button =
+            document.createElement("button");
 
-    button.innerHTML = `
-        <img
-            src="${getImage(number)}"
-            alt="Portfolio หน้า ${number}"
-        >
+        button.className =
+            "gallery-item";
 
-        <span class="gallery-number">
-            ${String(number).padStart(2, "0")}
-        </span>
-    `;
+        button.type = "button";
 
-    galleryGrid.appendChild(button);
+        button.innerHTML = `
+            <img
+                src="${getImage(number)}"
+                alt="Portfolio หน้า ${number}"
+            >
+
+            <span class="gallery-number">
+                ${String(number).padStart(2, "0")}
+            </span>
+        `;
+
+        galleryGrid.appendChild(button);
+    }
 }
 
 
 /* =========================================
    IMAGE MODAL
-========================================= */
+   ========================================= */
 
 const modal =
     document.getElementById("imageModal");
@@ -136,7 +203,10 @@ const modalImage =
 const modalClose =
     document.getElementById("modalClose");
 
+
 function openModal(image) {
+
+    if (!modal || !modalImage) return;
 
     modalImage.src = image.src;
     modalImage.alt = image.alt;
@@ -145,6 +215,7 @@ function openModal(image) {
 
     document.body.style.overflow = "hidden";
 }
+
 
 document.addEventListener(
     "click",
@@ -158,6 +229,7 @@ document.addEventListener(
         openModal(image);
     }
 );
+
 
 document.addEventListener(
     "click",
@@ -177,7 +249,10 @@ document.addEventListener(
     }
 );
 
+
 function closeModal() {
+
+    if (!modal || !modalImage) return;
 
     modal.classList.remove("active");
 
@@ -186,20 +261,30 @@ function closeModal() {
     document.body.style.overflow = "";
 }
 
-modalClose.addEventListener(
-    "click",
-    closeModal
-);
 
-modal.addEventListener(
-    "click",
-    (event) => {
+if (modalClose) {
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+}
 
-        if (event.target === modal) {
-            closeModal();
+
+if (modal) {
+
+    modal.addEventListener(
+        "click",
+        (event) => {
+
+            if (event.target === modal) {
+                closeModal();
+            }
+
         }
-    }
-);
+    );
+
+}
+
 
 document.addEventListener(
     "keydown",
@@ -208,124 +293,6 @@ document.addEventListener(
         if (event.key === "Escape") {
             closeModal();
         }
-    }
-);
-
-
-/* =========================================
-   MOBILE MENU
-========================================= */
-
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const navMenu =
-    document.getElementById("navMenu");
-
-menuToggle.addEventListener(
-    "click",
-    () => {
-        navMenu.classList.toggle("active");
-    }
-);
-
-document
-    .querySelectorAll(".nav-menu a")
-    .forEach((link) => {
-
-        link.addEventListener(
-            "click",
-            () => {
-                navMenu.classList.remove("active");
-            }
-        );
-
-    });
-
-
-/* =========================================
-   BACK TO TOP
-========================================= */
-
-const backToTop =
-    document.getElementById("backToTop");
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (window.scrollY > 500) {
-            backToTop.classList.add("show");
-        } else {
-            backToTop.classList.remove("show");
-        }
 
     }
-);
-
-backToTop.addEventListener(
-    "click",
-    () => {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   NAV ACTIVE
-========================================= */
-
-const sections =
-    document.querySelectorAll("section[id]");
-
-const navLinks =
-    document.querySelectorAll(".nav-menu a");
-
-const observer =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (!entry.isIntersecting) return;
-
-                    navLinks.forEach(
-                        (link) => {
-
-                            link.classList.remove("active");
-
-                            if (
-                                link.getAttribute("href") ===
-                                "#" + entry.target.id
-                            ) {
-                                link.classList.add("active");
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-        },
-        {
-            threshold: 0.3
-        }
-    );
-
-sections.forEach(
-    (section) => {
-        observer.observe(section);
-    }
-);
-
-
-console.log(
-    "THANASORN Portfolio พร้อมใช้งาน 💜"
 );
